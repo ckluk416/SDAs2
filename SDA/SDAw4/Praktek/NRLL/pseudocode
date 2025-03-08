@@ -1,0 +1,286 @@
+DEFINE info(P) = (P).info
+DEFINE next(P) = (P).next
+
+TYPE infotype = INTEGER
+
+TYPE address = POINTER TO tElmtlist
+STRUCT tElmtlist
+    infotype info         
+    address next          
+END STRUCT
+
+STRUCT NRLL
+    address First         
+END STRUCT
+
+
+FUNCTION CreateList(L)
+    L.First = NULL
+END FUNCTION
+
+
+FUNCTION InsertAtFirst(L, X)
+    P = NEW Node
+    P.info = X
+    P.next = L.First
+    L.First = P
+END FUNCTION
+
+FUNCTION InsertBeforeBetween(L, X, Y)
+    IF L.First IS NULL THEN
+        RETURN
+    END IF
+
+    IF L.First.info = Y THEN
+        InsertAtFirst(L, X)
+        RETURN
+    END IF
+
+    current = L.First
+    WHILE current.next IS NOT NULL AND current.next.info != Y DO
+        current = current.next
+    END WHILE
+
+    IF current.next IS NULL THEN
+        RETURN // Y not found
+    END IF
+
+    P = NEW Node
+    P.info = X
+    P.next = current.next
+    current.next = P
+END FUNCTION
+
+FUNCTION InsertBetween(L, X, Y)
+    InsertAfterBetween(L, X, Y) // Reuse InsertAfterBetween
+END FUNCTION
+
+FUNCTION InsertAfterBetween(L, X, Y)
+    current = L.First
+    WHILE current IS NOT NULL AND current.info != Y DO
+        current = current.next
+    END WHILE
+
+    IF current IS NULL THEN
+        RETURN // Y not found
+
+    P = NEW Node
+    P.info = X
+    P.next = current.next
+    current.next = P
+END FUNCTION
+
+FUNCTION InsertAtLast(L, X)
+    P = NEW Node
+    P.info = X
+    P.next = NULL
+
+    IF L.First IS NULL THEN
+        L.First = P
+    ELSE
+        last = L.First
+        WHILE last.next IS NOT NULL DO
+            last = last.next
+        END WHILE
+        last.next = P
+    END IF
+END FUNCTION
+
+FUNCTION InsertValue(L, X)
+    InsertAtLast(L, X) // Reuse InsertAtLast
+END FUNCTION
+
+
+FUNCTION DeleteAtFirst(L)
+    IF L.First IS NOT NULL THEN
+        temp = L.First
+        L.First = L.First.next
+        FREE(temp)
+    END IF
+END FUNCTION
+
+FUNCTION DeleteBeforeBetween(L, Y)
+    IF L.First IS NULL OR L.First.info = Y THEN
+        RETURN // List is empty or Y is the first element
+
+    current = L.First
+    previous = NULL
+
+    WHILE current.next IS NOT NULL AND current.next.info != Y DO
+        previous = current
+        current = current.next
+    END WHILE
+
+    IF current.next IS NULL THEN
+        RETURN // Y not found
+
+    IF previous IS NULL THEN
+        L.First = current.next // Y is the second element
+    ELSE
+        previous.next = current.next // Bypass the element before Y
+    END IF
+
+    FREE(current)
+END FUNCTION
+
+FUNCTION DeleteBetween(L, Y)
+    IF L.First IS NULL THEN
+        RETURN // List is empty
+
+    current = L.First
+    previous = NULL
+
+    WHILE current IS NOT NULL AND current.info != Y DO
+        previous = current
+        current = current.next
+    END WHILE
+
+    IF current IS NULL THEN
+        RETURN // Y not found
+
+    IF previous IS NULL THEN
+        L.First = current.next // Y is the first element
+    ELSE
+        previous.next = current.next // Bypass the element Y
+    END IF
+
+    FREE(current)
+END FUNCTION
+
+FUNCTION DeleteAfterBetween(L, Y)
+    current = L.First
+
+    WHILE current IS NOT NULL AND current.info != Y DO
+        current = current.next
+    END WHILE
+
+    IF current IS NULL OR current.next IS NULL THEN
+        RETURN // Y not found or Y is the last element
+
+    temp = current.next
+    current.next = temp.next
+    FREE(temp)
+END FUNCTION
+
+FUNCTION DeleteAtLast(L) 
+    IF L.First IS NULL THEN RETURN // List is empty
+    IF L.First.next IS NULL THEN
+        FREE(L.First)
+        L.First = NULL
+    ELSE
+        current = L.First
+        WHILE current.next.next IS NOT NULL DO
+            current = current.next
+        END WHILE
+        FREE(current.next)
+        current.next = NULL
+    END IF
+END FUNCTION
+
+FUNCTION DeleteValue(L, X)
+    IF L.First IS NULL THEN
+        RETURN // List is empty
+
+    IF L.First.info = X THEN
+        DeleteAtFirst(L)
+        RETURN
+    END IF
+
+    current = L.First
+    previous = NULL
+
+    WHILE current IS NOT NULL AND current.info != X DO
+        previous = current
+        current = current.next
+    END WHILE
+
+    IF current IS NULL THEN
+        RETURN // X not found
+
+    previous.next = current.next
+    FREE(current)
+END FUNCTION
+
+
+FUNCTION ModifyAtFirst(L, X)
+    IF L.First IS NOT NULL THEN
+        L.First.info = X
+    END IF
+END FUNCTION
+
+FUNCTION ModifyBeforeBetween(L, Y, X)
+    IF L.First IS NULL OR L.First.info = Y THEN
+        RETURN // List is empty or Y is the first element
+
+    current = L.First
+    previous = NULL
+
+    WHILE current.next IS NOT NULL AND current.next.info != Y DO
+        previous = current
+        current = current.next
+    END WHILE
+
+    IF current.next IS NULL THEN
+        RETURN // Y not found
+
+    IF previous IS NULL THEN
+        L.First.info = X // Y is the second element
+    ELSE
+        previous.info = X // Modify the element before Y
+    END IF
+END FUNCTION
+
+FUNCTION ModifyBetween(L, Y, X)
+    current = L.First
+    WHILE current IS NOT NULL DO
+        IF current.info = Y THEN
+            current.info = X
+            RETURN
+        END IF
+        current = current.next
+    END WHILE
+END FUNCTION
+
+FUNCTION ModifyAfterBetween(L, Y, X)
+    current = L.First
+    WHILE current IS NOT NULL DO
+        IF current.info = Y AND current.next IS NOT NULL THEN
+            current.next.info = X
+            RETURN
+        END IF
+        current = current.next
+    END WHILE
+END FUNCTION
+
+FUNCTION ModifyAtLast(L, X)
+    IF L.First IS NULL THEN
+        RETURN // List is empty
+
+    current = L.First
+    WHILE current.next IS NOT NULL DO
+        current = current.next
+    END WHILE
+    current.info = X
+END FUNCTION
+
+FUNCTION ModifyValue(L, X, NewValue)
+    current = L.First
+    WHILE current IS NOT NULL DO
+        IF current.info = X THEN
+            current.info = NewValue
+            RETURN
+        END IF
+        current = current.next
+    END WHILE
+END FUNCTION
+
+
+FUNCTION DeallocateList(L)
+    current = L.First
+    WHILE current IS NOT NULL DO
+        temp = current
+        current = current.next
+        FREE(temp)
+    END WHILE
+    L.First = NULL
+END FUNCTION
