@@ -1,0 +1,167 @@
+Tentu! Mari kita buat ilustrasi untuk setiap fungsi yang telah kita definisikan dalam 
+modul linked list menggunakan kasus awal dengan elemen `10`, `20`, dan `30`. Kita akan menunjukkan 
+bagaimana linked list berubah setelah setiap operasi.
+
+Kasus Awal
+
+Kita mulai dengan linked list yang berisi tiga elemen: `10`, `20`, dan `30`. 
+Setelah semua elemen ditambahkan, linked list akan terlihat seperti ini:
+
+
+        First -> [10 | *] -> [20 | *] -> [30 | NULL]
+
+
+1. InsertAtFirst
+Operasi: Menyisipkan `5` di awal.
+Sebelum:
+
+        First -> [10 | *] -> [20 | *] -> [30 | NULL]
+Setelah:
+
+        First -> [5 | *] -> [10 | *] -> [20 | *] -> [30 | NULL]
+
+
+2. InsertBeforeBetween
+Operasi: Menyisipkan `15` sebelum `20`.
+Sebelum:
+
+        First -> [5 | *] -> [10 | *] -> [20 | *] -> [30 | NULL]
+Setelah:
+
+        First -> [5 | *] -> [10 | *] -> [15 | *] -> [20 | *] -> [30 | NULL]
+
+3. InsertBetween
+Operasi: Menyisipkan `25` di antara `20` dan `30`.
+Sebelum:
+
+        First -> [5 | *] -> [10 | *] -> [15 | *] -> [20 | *] -> [30 | NULL]
+Setelah:
+
+        First -> [5 | *] -> [10 | *] -> [15 | *] -> [20 | *] -> [25 | *] -> [30 | NULL]
+
+4. InsertAfterBetween
+Operasi: Menyisipkan `35` setelah `30`.
+Sebelum:
+
+        First -> [5 | *] -> [10 | *] -> [15 | *] -> [20 | *] -> [25 | *] -> [30 | NULL]
+Setelah:
+
+        First -> [5 | *] -> [10 | *] -> [15 | *] -> [20 | *] -> [25 | *] -> [30 | *] -> [35 | NULL]
+
+5. InsertAtLast
+Operasi: Menyisipkan `40` di akhir.
+Sebelum:
+
+        First -> [5 | *] -> [10 | *] -> [15 | *] -> [20 | *] -> [25 | *] -> [30 | *] -> [35 | NULL]
+Setelah:
+
+        First -> [5 | *] -> [10 | *] -> [15 | *] -> [20 | *] -> [25 | *] -> [30 | *] -> [35 | *] -> [40 | NULL]
+
+6. DeleteAtFirst
+Operasi: Menghapus elemen pertama.
+Sebelum:
+
+        First -> [5 | *] -> [10 | *] -> [15 | *] -> [20 | *] -> [25 | *] -> [30 | *] -> [35 | *] -> [40 | NULL]
+Setelah:
+
+        First -> [10 | *] -> [15 | *] -> [20 | *] -> [25 | *] -> [30 | *] -> [35 | *] -> [40 | NULL]
+
+7. DeleteBeforeBetween
+Operasi: Menghapus elemen sebelum `25`.
+Sebelum:
+
+        First -> [10 | *] -> [15 | *] -> [20 | *] -> [25 | *] -> [30 | *] -> [35 | *] -> [40 | NULL]
+Setelah:
+
+        First -> [10 | *] -> [20 | *] -> [25 | *] -> [30 | *] -> [35 | *] -> [40 | NULL]
+
+8. DeleteBetween
+Operasi: Menghapus elemen `30`.
+Sebelum:
+
+        First -> [10 | *] -> [20 | *] -> [25 | *] -> [30 | *] -> [35 | *] -> [40 | NULL]
+Setelah:
+
+        First -> [10 | *] -> [20 | *] -> [25 | *] -> [35 | *] -> [40 | NULL]
+
+
+9. DeleteAfterBetween
+Operasi: Menghapus elemen setelah `25`.
+Sebelum:
+
+        First -> [10 | *] -> [20 | *] -> [25 | *] -> [35 | *] -> [40 | NULL]
+
+Setelah:
+
+
+        First -> [10 | *] -> [20 | *] -> [25 | *] -> [40 | NULL]
+
+10. DeleteAtLast
+Operasi: Menghapus elemen terakhir.
+Sebelum:
+
+        First -> [10 | *] -> [20 | *] -> [25 | *] -> [40 | NULL]
+
+Setelah:
+
+        First -> [10 | *] -> [20 | *] -> [25 | NULL]
+
+11. ModifyAtFirst
+Operasi: Mengubah nilai elemen pertama menjadi `15`.
+Sebelum:
+
+        First -> [10 | *] -> [20 | *] -> [25 | NULL]
+
+Setelah:
+
+        First -> [15 | *] -> [20 | *] -> [25 | NULL]
+
+12. ModifyBeforeBetween
+Operasi: Mengubah nilai elemen sebelum `25` menjadi `22`.
+Sebelum:
+
+        First -> [15 | *] -> [20 | *] -> [25 | NULL]
+
+Setelah:
+
+        First -> [15 | *] -> [22 | *] -> [25 | NULL]
+
+13. ModifyBetween
+Operasi: Mengubah nilai `20` menjadi `21`.
+Sebelum:
+
+        First -> [15 | *] -> [22 | *] -> [25 | NULL]
+
+Setelah:
+
+        First -> [15 | *] -> [21 | *] -> [25 | NULL]
+
+14. ModifyAfterBetween
+Operasi: Mengubah nilai setelah `21` menjadi `26`.
+Sebelum:
+
+        First -> [15 | *] -> [21 | *] -> [25 | NULL]
+
+Setelah:
+
+        First -> [15 | *] -> [21 | *] -> [26 | NULL]
+
+15. ModifyAtLast
+Operasi: Mengubah nilai elemen terakhir menjadi `30`.
+Sebelum:
+
+        First -> [15 | *] -> [21 | *] -> [26 | NULL]
+
+Setelah:
+
+        First -> [15 | *] -> [21 | *] -> [30 | NULL]
+
+16. ModifyValue
+Operasi: Mengubah nilai `21` menjadi `22`.
+Sebelum:
+
+        First -> [15 | *] -> [21 | *] -> [30 | NULL]
+
+Setelah:
+
+        First -> [15 | *] -> [22 | *] -> [30 | NULL]
