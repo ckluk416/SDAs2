@@ -53,4 +53,9 @@ hasil belum ada karena program belum selesai<br>
 
 @2025-04-27T13:27:30
 
+update per hari ini<br>
+program belum dapat sesuai dengan harapan<br>
+program ini juga tidak sepenuhnya buatan saya<br>
+karena akan segera habis saya commit apa adanya<br>
+@2025-05-01T23:51:30
 
