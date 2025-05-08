@@ -20,7 +20,7 @@ program manajemen perpustakaan yang diharapkan dapat memenuhi serta menggunakan 
     [-----]               [-----]
     [namaN]               [namaN]
     </pre>
-- doubly linked list
+- double pointer linked list
     <pre>
       [* |buku1|stok|*]→ ... →[* |bukuN|stok|*]→NULL
        ↓                       ↓
